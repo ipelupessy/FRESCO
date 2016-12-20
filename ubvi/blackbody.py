@@ -1,7 +1,7 @@
 import numpy
 
 from amuse.units import units,constants
-from amuse.units.quantities import VectorQuantity
+
 pi=numpy.pi
 e=numpy.e
 kB=constants.kB
@@ -12,13 +12,6 @@ sigma=constants.Stefan_hyphen_Boltzmann_constant
 
 def B_nu(nu,t):
   return 2*h*nu**3/c**2 * 1./ (e**(h*nu/kB/t)-1)
-
-def __B_lambda__(l,temp):
-    tmp = VectorQuantity([], 1e+50 * units.m**-1 * units.kg * units.s**-3)
-    for t in temp:
-        curr = 2*h*c**2/l**5*1./(e**(h*c/(l*kB*t))-1)
-        tmp.append(curr)
-    return tmp
 
 def B_lambda(l,t):
   return 2*h*c**2/l**5*1./(e**(h*c/(l*kB*t))-1)

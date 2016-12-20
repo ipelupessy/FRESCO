@@ -8,11 +8,14 @@ base1=[ lambda x: x**0, lambda x: x, lambda x: x**2,lambda x: x**3,lambda x : x*
 
 base2=[ lambda x: 1/(x+0.01)**3, lambda x: x**0., lambda x: 1/(1.01-x)**3,lambda x: x**3,lambda x : x**4]
 
-base3=[ lambda x: B_lambda(x,5000.| units.K).number,
-        lambda x: B_lambda(x,20000.| units.K).number,
-        lambda x: B_lambda(x,2000. | units.K).number,
-        lambda x: B_lambda(x,3000.| units.K).number,
-        lambda x: B_lambda(x,10000.| units.K).number  ]
+
+lmin=3000. | units.angstrom
+lmax=9200. | units.angstrom
+base3=[ lambda x: B_lambda(lmin+(lmax-lmin)*x,5000.| units.K).number,
+        lambda x: B_lambda(lmin+(lmax-lmin)*x,20000.| units.K).number,
+        lambda x: B_lambda(lmin+(lmax-lmin)*x,2000. | units.K).number,
+        lambda x: B_lambda(lmin+(lmax-lmin)*x,3000.| units.K).number,
+        lambda x: B_lambda(lmin+(lmax-lmin)*x,10000.| units.K).number  ]
 
 default_base=base1
 
