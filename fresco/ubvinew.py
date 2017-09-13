@@ -11,7 +11,11 @@ from __future__ import (
 import os
 
 import numpy
-from scipy.ndimage import zoom, gaussian_filter
+try:
+  from scipy.ndimage import zoom, gaussian_filter
+except:
+  from convolve import gaussian_filter
+
 
 from amuse.datamodel import (
         Particles,
@@ -35,21 +39,24 @@ from fresco.color_converter import (
 
 # import time
 
-from astropy.convolution import (
-        # convolve,
-        convolve_fft,
-        )
-
-import astropy.io.fits as pyfits
-
-
-def Convolve(
-        image,
-        kernel,
-        ):
-    result = convolve_fft(image, kernel, boundary='fill')
-    return result
-
+try:
+    from astropy.convolution import (
+            # convolve,
+            convolve_fft,
+            )
+    def Convolve(
+            image,
+            kernel,
+            ):
+        result = convolve_fft(image, kernel, boundary='fill')
+        return result
+except:
+    from convolve import Convolve
+    
+try:
+    import astropy.io.fits as pyfits
+except:
+    import pyfits
 
 def get_psf(
         instrument="WFPC_II_WFC3",

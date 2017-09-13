@@ -19,7 +19,10 @@ from amuse.datamodel.rotation import rotate
 from fresco.ubvinew import rgb_frame
 from fresco.fieldstars import new_field_stars
 
-from scipy.ndimage import gaussian_filter
+try:
+  from scipy.ndimage import zoom, gaussian_filter
+except:
+  from fresco.convolve import gaussian_filter
 
 import numpy as np
 # import matplotlib
@@ -404,7 +407,7 @@ def initialise_image(
         ax.spines['right'].set_visible(False)
         ax.spines['bottom'].set_visible(False)
         ax.spines['left'].set_visible(False)
-        ax.set_facecolor('black')
+        #~ ax.set_facecolor('black')
     else:
         # Simply clear and re-use the old figure
         ax = fig.get_axes()[subplot]
